@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -150,6 +150,177 @@
           alert("Oops! Something went wrong. Try again.");
           console.error(err);
         });
+    });
+  </script>
+
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YAYYYY</title>
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: "Comic Sans MS", "Poppins", cursive;
+      background: linear-gradient(135deg, #ffeaf4, #ffd6e8);
+      overflow: hidden;
+    }
+
+    .box {
+      background: white;
+      padding: 45px 55px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 25px 45px rgba(255, 105, 180, 0.3);
+      animation: floatIn 0.9s ease;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #ff5fa2;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      border-radius: 999px;
+      border: 2px solid #ffd1e6;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px 40px;
+      font-size: 17px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff85c2, #ff5fa2);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.15);
+      box-shadow: 0 10px 25px rgba(255, 95, 162, 0.4);
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      animation: floatUp linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-120vh) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatIn {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>YAYYYYY 🥳💖</h1>
+    <p>Drop your ML ID so I can add you 👀</p>
+
+    <form id="mlForm">
+      <input
+        type="text"
+        name="entry.1632449162"
+        placeholder="ML ID"
+        required
+      >
+      <br>
+      <button type="submit">Send ✨</button>
+    </form>
+
+    <p id="thankYou" style="display:none; color:#ff5fa2; font-weight:bold; margin-top:10px;">
+      Thank you my new friend! 🎉 I will add you later!💖
+    </p>
+  </div>
+
+  <div class="hearts"></div>
+
+  <script>
+    const heartsContainer = document.querySelector(".hearts");
+    const heartEmojis = ["💖", "💗", "💕", "💘", "💝"];
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (16 + Math.random() * 20) + "px";
+      heart.style.animationDuration = (4 + Math.random() * 3) + "s";
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+    setInterval(createHeart, 400);
+
+    const form = document.getElementById("mlForm");
+    const thankYou = document.getElementById("thankYou");
+
+    const GOOGLE_FORM_URL =
+      "https://docs.google.com/forms/d/e/1FAIpQLSeSKggUX8iBN8CEUB2EPLnbtj0ysKTgW6_WEhJoeJYKixdT3Q/formResponse";
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      fetch(GOOGLE_FORM_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
+      }).then(() => {
+        thankYou.style.display = "block";
+        form.reset();
+      }).catch(() => {
+        alert("Something went wrong 😭 Try again");
+      });
     });
   </script>
 
